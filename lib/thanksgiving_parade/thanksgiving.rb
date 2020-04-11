@@ -7,10 +7,11 @@ class ThanksgivingParade::Thanksgiving
   attr_accessor :festival, :url, :pre_parade_fun, :parade_route, :watch_in_person, :lineup, :celebrity_sightings, :new_balloons, :general_tips, :watch_on_tv
   @@all = []
 
-  def self.new_from_index_page(r)
+  def self.new_from_index_page(r, url)
     self.new(
       r.css(".heading-one.bsp-article-title").text,
-      "https://www.playbill.com/article/playbills-guide-to-the-2019-macys-thanksgiving-day-parade#{r.attribute("href").text}"
+      url,
+      r
       )
   end
 
