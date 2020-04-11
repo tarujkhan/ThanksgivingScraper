@@ -9,4 +9,5 @@ require_relative '../lib/cli'
 require_relative '../lib/thanksgiving'
 require_relative '../lib/scraper'
 
+# puts "I am about to call this function"
 CLI.new.call
