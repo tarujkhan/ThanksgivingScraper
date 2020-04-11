@@ -1,4 +1,6 @@
 require "bundler/setup"
-require "CLI"
+require "CLIPROJECT"
 require "pry"
-Pry.start
+Pry.start   
+
+#onfig.autoload_paths += %W(#{config.root}/lib)

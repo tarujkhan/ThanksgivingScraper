@@ -5,9 +5,10 @@ require 'pry'
 require 'open-uri'
 require 'NokoGiri'
 
-require_relative '../lib/cli'
-require_relative '../lib/thanksgiving'
-require_relative '../lib/scraper'
+require_relative '../lib/CLIPROJECT/cli'
+require_relative '../lib/CLIPROJECT/thanksgiving'
+require_relative '../lib/CLIPROJECT/scraper'
+require_relative '../lib/CLIPROJECT/version'
 
 # puts "I am about to call this function"
 CLI.new.call

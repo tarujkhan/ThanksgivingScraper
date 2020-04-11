@@ -1,6 +1,10 @@
 # # frozen_string_literal: true
 
 require 'pry'
+require 'nokogiri'
+require 'open-uri'
+require_relative '../thanksgivingparade.rb'
+require_relative './thanksgiving.rb'
 
 # class Scraper
 #   PARADE_URL = 'https://www.playbill.com/article/playbills-guide-to-the-2019-macys-thanksgiving-day-parade'
@@ -39,16 +43,21 @@ require 'pry'
 class ThanksgivingParade::Scraper
 
   def get_page
-    Nokogiri::HTML(open(https://www.playbill.com/article/playbills-guide-to-the-2019-macys-thanksgiving-day-parade))
+    Nokogiri::HTML(open('https://www.playbill.com/article/playbills-guide-to-the-2019-macys-thanksgiving-day-parade'))
   end
 
   def scrape_parade_index
-    self.get_page("heading-three bsp-article-subtitle")
+   # self.get_page("heading-three bsp-article-subtitle")
+   get_page
   end
 
   def make_parade
-  scrape_parade_index.each do |p|
-    ThanksgivingParade::Thanksgiving.new_from_index(p)
-  end
+    puts '1232323'
+    p = scrape_parade_index
+  #scrape_parade_index.each do |p|
+   # puts p 
+    #puts '???'
+    ThanksgivingParade::Thanksgiving.new_from_index_page(p)
+  #end
 end
 end 

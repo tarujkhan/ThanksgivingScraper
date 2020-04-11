@@ -1,7 +1,7 @@
 
 
 require 'pry'
-require 'ThanksgivingParade'
+require_relative '../thanksgivingparade.rb'
 
 class ThanksgivingParade::Thanksgiving
   attr_accessor :festival, :url, :pre_parade_fun, :parade_route, :watch_in_person, :lineup, :celebrity_sightings, :new_balloons, :general_tips, :watch_on_tv
@@ -9,17 +9,15 @@ class ThanksgivingParade::Thanksgiving
 
   def self.new_from_index_page(r)
     self.new(
-      r.css("u").text,
-      "https://www.playbill.com/article/playbills-guide-to-the-2019-macys-thanksgiving-day-parade#{r.attribute("href").text}",
-      r.css("p")[1].text,
-      r.css(".position").text
+      r.css(".heading-one.bsp-article-title").text,
+      "https://www.playbill.com/article/playbills-guide-to-the-2019-macys-thanksgiving-day-parade#{r.attribute("href").text}"
       )
   end
 
   def initialize(festival, url)
     @festival = festival
     @url = url
-    @@all << self
+    # @@all << self
   end
 
   def self.all
@@ -27,7 +25,7 @@ class ThanksgivingParade::Thanksgiving
   end
 
   def self.find(id)
-    self.all[id - 1]
+    self.all[id-1]
   end
 
   def pre_parade_fun

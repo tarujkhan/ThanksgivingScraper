@@ -1,10 +1,11 @@
 
 
 require 'pry'
-require 'Thanksgiving'
+require_relative '../thanksgivingparade.rb'
+require_relative './scraper.rb'
+require_relative './thanksgiving.rb'
 
-
-class ThanksgivingParade::cli
+class ThanksgivingParade::CLI
   
   def call
     ThanksgivingParade::Scraper.new.make_parade
@@ -78,3 +79,6 @@ class ThanksgivingParade::cli
     end
   
   end
+
+  parade1 = ThanksgivingParade::CLI.new
+  parade1.call
