@@ -8,25 +8,34 @@ require_relative './thanksgiving.rb'
 class ThanksgivingParade::CLI
   
   def call
-    ThanksgivingParade::Scraper.new.make_parade
+    @parade = ThanksgivingParade::Scraper.new.make_parade
     puts "Welcome to the Thanksgiving Parade in New York"
     start
   end
 
   def start
     puts ""
-    puts "What tab number would you like to see? 1,2,3,4,5,6,7,8?"
+    puts "What tab number would you like to see? 1,2,3,4,5,6,7?"
     input = gets.strip.to_i
 
-    print_tabs(input)
+    if(input <= 0 || input > 7)
+      throw 'Invalid input'
+    end  
+    
+    #print_tabs(input)
 
-    puts ""
-    puts "What tab would you like more information on?"
-    input = gets.strip
+    #puts ""
+    #puts "What tab would you like more information on?"
+    #input = gets.strip.to_i
 
-    thanksgiving = ThanksgivingParade::Thanksgiving.find(input.to_i)
+    thanksgiving = ThanksgivingParade::Thanksgiving.find(input)
 
-    print parade_info(parade)
+    puts '-'*20
+    puts ThanksgivingParade::Thanksgiving.titles[input - 1].text
+    puts thanksgiving.text.strip
+    puts '-'*20
+
+    #print_parade_info(@parade)
 
     puts ""
     puts "Would you like to see another tab? Enter Y or N"
@@ -71,10 +80,10 @@ class ThanksgivingParade::CLI
         
     def print_tabs(from_number)
       puts ""
-      puts "---------- Tabs #{from_number} - #{from_number+9} ----------"
+      puts "---------- Tabs #{from_number} - #{7} ----------"
       puts ""
-      ThanksgivingParade::Thanksgiving.all[from_number-1, 8].each.with_index(from_number) do |tabname, index|
-        puts "#{index}. #{tabname.festival}"
+      ThanksgivingParade::Thanksgiving.titles[from_number-1, 8].each.with_index(from_number) do |tabname, index|
+        puts "#{index}. #{tabname.text}"
       end
     end
   

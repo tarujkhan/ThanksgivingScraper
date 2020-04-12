@@ -41,9 +41,10 @@ require_relative './thanksgiving.rb'
 #   end
 # end
 class ThanksgivingParade::Scraper
+  @@url = 'https://www.playbill.com/article/playbills-guide-to-the-2019-macys-thanksgiving-day-parade'
 
   def get_page
-    Nokogiri::HTML(open('https://www.playbill.com/article/playbills-guide-to-the-2019-macys-thanksgiving-day-parade'))
+    Nokogiri::HTML(open(@@url))
   end
 
   def scrape_parade_index
@@ -52,12 +53,7 @@ class ThanksgivingParade::Scraper
   end
 
   def make_parade
-    puts '1232323'
     p = scrape_parade_index
-  #scrape_parade_index.each do |p|
-   # puts p 
-    #puts '???'
-    ThanksgivingParade::Thanksgiving.new_from_index_page(p)
-  #end
-end
+    ThanksgivingParade::Thanksgiving.new_from_index_page(p, @@url)
+  end
 end 

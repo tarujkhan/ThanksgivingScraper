@@ -6,6 +6,7 @@ require_relative '../thanksgivingparade.rb'
 class ThanksgivingParade::Thanksgiving
   attr_accessor :festival, :url, :pre_parade_fun, :parade_route, :watch_in_person, :lineup, :celebrity_sightings, :new_balloons, :general_tips, :watch_on_tv
   @@all = []
+  @@titles = []
 
   def self.new_from_index_page(r, url)
     self.new(
@@ -15,10 +16,16 @@ class ThanksgivingParade::Thanksgiving
       )
   end
 
-  def initialize(festival, url)
+  def initialize(festival, url, doc)
     @festival = festival
     @url = url
-    # @@all << self
+    @doc = doc
+    @@all = doc.css('div.bsp-article-content').css('ul')
+    @@titles = doc.css('u > b[data-rte2-sanitize="bold"]')
+  end
+
+  def self.titles
+    @@titles
   end
 
   def self.all
@@ -30,7 +37,6 @@ class ThanksgivingParade::Thanksgiving
   end
 
   def pre_parade_fun
-    binding.pry
     @pre_parade_fun ||= doc.css('div.bsp-article-content').css('ul')[0].text.strip
   end
 
