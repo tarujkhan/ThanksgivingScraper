@@ -23,3 +23,8 @@ show information for input
 ask user if they want more information
 if not exit and show thank you greeting
 
+For Thanksgiving file:
+Initialize the Thanksgiving class
+Getting the indexes from the page
+Create instances of all the tabs
+Assigning the id and links from the website

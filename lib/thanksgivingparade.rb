@@ -1,4 +1,4 @@
 module ThanksgivingParade
-end 
+end
 
 # require_relative '../config/environment'

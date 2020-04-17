@@ -1,19 +1,17 @@
-
-
 require 'pry'
 require_relative '../thanksgivingparade.rb'
 
 class ThanksgivingParade::Thanksgiving
   attr_accessor :festival, :url, :pre_parade_fun, :parade_route, :watch_in_person, :lineup, :celebrity_sightings, :new_balloons, :general_tips, :watch_on_tv
   @@all = []
-  @@titles = []
+  @@tabs = []
 
   def self.new_from_index_page(r, url)
-    self.new(
-      r.css(".heading-one.bsp-article-title").text,
+    new(
+      r.css('.heading-one.bsp-article-title').text,
       url,
       r
-      )
+    )
   end
 
   def initialize(festival, url, doc)
@@ -21,11 +19,11 @@ class ThanksgivingParade::Thanksgiving
     @url = url
     @doc = doc
     @@all = doc.css('div.bsp-article-content').css('ul')
-    @@titles = doc.css('u > b[data-rte2-sanitize="bold"]')
+    @@tabs = doc.css('u > b[data-rte2-sanitize="bold"]')
   end
 
   def self.titles
-    @@titles
+    @@tabsn
   end
 
   def self.all
@@ -33,7 +31,7 @@ class ThanksgivingParade::Thanksgiving
   end
 
   def self.find(id)
-    self.all[id-1]
+    @@all[id - 1]
   end
 
   def pre_parade_fun
@@ -69,8 +67,6 @@ class ThanksgivingParade::Thanksgiving
   end
 
   def doc
-    @doc ||= Nokogiri::HTML(open(self.url))
+    @doc ||= Nokogiri::HTML(open(url))
   end
 end
-
-
